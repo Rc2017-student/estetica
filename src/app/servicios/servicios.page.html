@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Servicios Ofrecidos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Servicios Ofrecidos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Formulario para ingresar un nuevo servicio -->
+  <ion-item>
+    <ion-label position="stacked">Nombre del Servicio:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtNombreServicio"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Descripción:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtDescripcionServicio"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Precio:</ion-label>
+    <ion-input type="number" [(ngModel)]="txtPrecioServicio"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Duración (en minutos):</ion-label>
+    <ion-input type="number" [(ngModel)]="txtDuracionServicio"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Promoción o Descuento:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtPromocion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Insumos Usados (si es necesario):</ion-label>
+    <ion-input type="text" [(ngModel)]="txtInsumos"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="guardarServicio()">Guardar Servicio</ion-button>
+
+  <!-- Lista de servicios guardados -->
+  <ion-list>
+    <ion-card *ngFor="let servicio of servicios; let i = index">
+      <ion-card-header>
+        <ion-card-title>{{ servicio.nombre }}</ion-card-title>
+        <ion-card-subtitle>Precio: ${{ servicio.precio }} | Duración: {{ servicio.duracion }} mins</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p>
+        <p><strong>Promoción:</strong> {{ servicio.promocion || 'No aplica' }}</p>
+        <p><strong>Insumos:</strong> {{ servicio.insumos || 'No aplica' }}</p>
+      </ion-card-content>
+
+      <ion-button color="primary" expand="block" (click)="editarServicio(i)">Editar</ion-button>
+      <ion-button color="danger" expand="block" (click)="borrarServicio(i)">Eliminar</ion-button>
+    </ion-card>
+  </ion-list>
+</ion-content>

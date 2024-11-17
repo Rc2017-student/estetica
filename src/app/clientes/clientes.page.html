@@ -1,0 +1,89 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Clientes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registro y Edición de Clientes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Formulario para ingresar la información del cliente -->
+  <ion-item>
+    <ion-label position="stacked">Nombre:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtNombreCliente"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Teléfono:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtTelefonoCliente"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Correo:</ion-label>
+    <ion-input type="email" [(ngModel)]="txtCorreoCliente"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Preferencias:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtPreferencias"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="guardarCliente()">Guardar Cliente</ion-button>
+
+  <!-- Lista de clientes registrados -->
+  <ion-list>
+    <ion-card *ngFor="let cliente of clientes; let i = index">
+      <ion-card-header>
+        <ion-card-title>{{ cliente.nombre }}</ion-card-title>
+        <ion-card-subtitle>{{ cliente.telefono }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Correo:</strong> {{ cliente.correo }}</p>
+        <p><strong>Preferencias:</strong> {{ cliente.preferencias || 'No tiene preferencias registradas' }}</p>
+        <p><strong>Recompensas:</strong> {{ cliente.recompensas }} puntos</p>
+      </ion-card-content>
+
+      <ion-button color="primary" expand="block" (click)="editarCliente(i)">Editar</ion-button>
+      <ion-button color="danger" expand="block" (click)="borrarCliente(i)">Eliminar</ion-button>
+
+<!-- Formulario para registrar un servicio para el cliente -->
+<ion-item>
+  <ion-label position="stacked">Fecha del Servicio:</ion-label>
+  <ion-datetime [(ngModel)]="fechaServicio"></ion-datetime>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Seleccionar Servicio:</ion-label>
+  <ion-select [(ngModel)]="servicioSeleccionado">
+    <ion-select-option *ngFor="let servicio of serviciosDisponibles" [value]="servicio.nombre">
+      {{ servicio.nombre }} - ${{ servicio.precio }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
+
+      <ion-button expand="full" (click)="registrarServicio(i)">Registrar Servicio</ion-button>
+
+      <!-- Historial de servicios realizados -->
+      <ion-card-header>
+        <ion-card-title>Historial de Citas</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let cita of cliente.historial">
+            <p><strong>Fecha:</strong> {{ cita.fecha }}</p>
+            <p><strong>Servicios:</strong> {{ cita.servicios.join(', ') }}</p>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

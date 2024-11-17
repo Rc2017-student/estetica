@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Gestión de Citas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Gestión de Citas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Formulario para agregar citas -->
+  <ion-item>
+    <ion-label position="stacked">Fecha y Hora:</ion-label>
+    <ion-datetime [(ngModel)]="txtFechaHora" display-format="DD/MM/YYYY HH:mm" minute-values="0,15,30,45"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Estilista:</ion-label>
+    <ion-select [(ngModel)]="txtEstilista">
+      <ion-select-option *ngFor="let estilista of estilistasDisponibles">{{ estilista }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Servicios:</ion-label>
+    <ion-select [(ngModel)]="txtServicios" multiple="true">
+      <ion-select-option *ngFor="let servicio of serviciosDisponibles">{{ servicio.nombre }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="guardarCita()">Guardar Cita</ion-button>
+
+  <!-- Lista de citas -->
+  <ion-list>
+    <ion-card *ngFor="let cita of citas; let i = index">
+      <ion-card-header>
+        <ion-card-title>{{ cita.fechaHora }}</ion-card-title>
+        <ion-card-subtitle>Estilista: {{ cita.estilista }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Servicios:</strong> {{ cita.servicios.join(', ') }}</p>
+      </ion-card-content>
+
+      <ion-button color="primary" expand="block" (click)="editarCita(i)">Editar</ion-button>
+      <ion-button color="danger" expand="block" (click)="borrarCita(i)">Eliminar</ion-button>
+    </ion-card>
+  </ion-list>
+</ion-content>
