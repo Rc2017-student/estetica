@@ -1,0 +1,7 @@
+{
+  "name": "estetica",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
