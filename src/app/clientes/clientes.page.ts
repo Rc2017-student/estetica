@@ -45,7 +45,7 @@ export class ClientesPage implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // Guardar o editar un cliente
   guardarCliente() {
@@ -73,6 +73,14 @@ export class ClientesPage implements OnInit {
       this.clientes.push(cliente);
     }
 
+    //Notificacion de servicio realizado
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Servicio realizado a ${this.txtNombreCliente}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+
     // Limpiar campos después de guardar
     this.txtNombreCliente = '';
     this.txtTelefonoCliente = '';
@@ -99,6 +107,14 @@ export class ClientesPage implements OnInit {
     // Sumar puntos de fidelización por el servicio registrado
     this.clientes[i].recompensas += 10; // Puedes cambiar 10 por cualquier cantidad de puntos que quieras asignar
 
+    //Notificacion de servicio realizado
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Servicio realizado a ${this.clientes[i].nombre}\n Puntos de recomensa: ${this.clientes[i].recompensas}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+
     // Limpiar los campos después de registrar el servicio
     this.fechaServicio = '';
     this.servicioSeleccionado = '';
@@ -109,6 +125,13 @@ export class ClientesPage implements OnInit {
 
   // Borrar un cliente
   borrarCliente(i: number) {
+    //Notificacion de borrar cliente
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Cliente eliminado: ${this.clientes[i].nombre}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
     this.clientes.splice(i, 1);
     localStorage.setItem('clientes', JSON.stringify(this.clientes));
   }

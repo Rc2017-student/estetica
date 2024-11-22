@@ -30,7 +30,11 @@ const routes: Routes = [
   {
     path: 'inventario',
     loadChildren: () => import('./inventario/inventario.module').then( m => m.InventarioPageModule)
+  },  {
+    path: 'notificaciones',
+    loadChildren: () => import('./notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
   },
+
 ];
 
 @NgModule({

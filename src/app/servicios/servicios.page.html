@@ -3,6 +3,9 @@
     <ion-title>
       Servicios Ofrecidos
     </ion-title>
+    <ion-item button [routerLink]="['/menuprincipal']">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-item>  
   </ion-toolbar>
 </ion-header>
 
@@ -40,8 +43,8 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Insumos Usados (si es necesario):</ion-label>
-    <ion-input type="text" [(ngModel)]="txtInsumos"></ion-input>
+    <ion-label position="stacked">Servicios adicionales:</ion-label>
+    <ion-input type="text" [(ngModel)]="txtAdicionales"></ion-input>
   </ion-item>
 
   <ion-button expand="full" (click)="guardarServicio()">Guardar Servicio</ion-button>
@@ -57,7 +60,6 @@
       <ion-card-content>
         <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p>
         <p><strong>Promoción:</strong> {{ servicio.promocion || 'No aplica' }}</p>
-        <p><strong>Insumos:</strong> {{ servicio.insumos || 'No aplica' }}</p>
       </ion-card-content>
 
       <ion-button color="primary" expand="block" (click)="editarServicio(i)">Editar</ion-button>

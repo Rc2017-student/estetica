@@ -38,7 +38,7 @@ export class CitasPage implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // Guardar una nueva cita
   guardarCita() {
@@ -61,10 +61,27 @@ export class CitasPage implements OnInit {
 
     // Guardar en localStorage
     localStorage.setItem('citas', JSON.stringify(this.citas));
+
+    //Notificacio cita agregada
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Cita guardada para ${this.txtFechaHora}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
   }
 
   // Borrar una cita
   borrarCita(i: number) {
+
+    //Notificacio Eliminada
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Cita eliminada para ${this.citas[i].fechaHora}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+
     this.citas.splice(i, 1);
     localStorage.setItem('citas', JSON.stringify(this.citas));
   }

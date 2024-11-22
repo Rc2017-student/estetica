@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-servicios',
@@ -13,7 +14,7 @@ export class ServiciosPage implements OnInit {
   txtPrecioServicio: number = 0;
   txtDuracionServicio: number = 0;
   txtPromocion: string = '';
-  txtInsumos: string = '';
+  txtAdicionales: string = "";
 
   // Lista de servicios guardados
   servicios: {
@@ -22,10 +23,10 @@ export class ServiciosPage implements OnInit {
     precio: number;
     duracion: number;
     promocion: string;
-    insumos: string;
+    adicionales: string;
   }[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
     // Recuperar servicios guardados del localStorage
     const serviciosGuardados = localStorage.getItem('servicios');
     if (serviciosGuardados) {
@@ -33,15 +34,30 @@ export class ServiciosPage implements OnInit {
     }
   }
 
-  ngOnInit() {}
 
+  ngOnInit() { }
+
+  navigateTo(page: string) {
+    this.router.navigate([`/${page}`]);
+  }
   // Guardar un nuevo servicio
   guardarServicio() {
+    //this.notificacionesService.agregarNotificacion(`Servicio "${this.txtNombreServicio}" agregado.`);
+    // Notificar adición de nuevo incidente
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Nuevo servicio agregado ${this.txtNombreServicio}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+
+    alert('Incidente guardado exitosamente');
     if (
       this.txtNombreServicio === '' ||
       this.txtDescripcionServicio === '' ||
       this.txtPrecioServicio === 0 ||
-      this.txtDuracionServicio === 0
+      this.txtDuracionServicio === 0 ||
+      this.txtAdicionales === ""
     ) {
       alert('Llena todos los campos antes de guardar');
       return;
@@ -54,7 +70,7 @@ export class ServiciosPage implements OnInit {
       precio: this.txtPrecioServicio,
       duracion: this.txtDuracionServicio,
       promocion: this.txtPromocion,
-      insumos: this.txtInsumos,
+      adicionales: this.txtAdicionales
     });
 
     // Limpiar los campos después de guardar
@@ -63,7 +79,7 @@ export class ServiciosPage implements OnInit {
     this.txtPrecioServicio = 0;
     this.txtDuracionServicio = 0;
     this.txtPromocion = '';
-    this.txtInsumos = '';
+    this.txtAdicionales = '';
 
     // Guardar en localStorage
     localStorage.setItem('servicios', JSON.stringify(this.servicios));
@@ -71,6 +87,13 @@ export class ServiciosPage implements OnInit {
 
   // Borrar un servicio
   borrarServicio(i: number) {
+
+    let notificaciones = JSON.parse(localStorage.getItem('notificaciones') || '[]');
+    notificaciones.push({
+      mensaje: `Servicio eliminado: ${this.servicios[i].nombre}`,
+      fecha: new Date().toLocaleString()
+    });
+    localStorage.setItem('notificaciones', JSON.stringify(notificaciones));
     this.servicios.splice(i, 1);
     localStorage.setItem('servicios', JSON.stringify(this.servicios));
   }
@@ -83,7 +106,7 @@ export class ServiciosPage implements OnInit {
     this.txtPrecioServicio = servicio.precio;
     this.txtDuracionServicio = servicio.duracion;
     this.txtPromocion = servicio.promocion;
-    this.txtInsumos = servicio.insumos;
+    this.txtAdicionales = servicio.adicionales
     this.borrarServicio(i);
   }
 }
