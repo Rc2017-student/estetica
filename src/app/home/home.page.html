@@ -1,66 +1,72 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      {{ isRegistering ? 'Registrar Usuario' : 'Iniciar Sesión' }}
+    <ion-title text-center>
+      {{ isRegistering ? 'Crear cuenta' : 'Inicia sesión' }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ isRegistering ? 'Registrar Usuario' : 'Iniciar Sesión' }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="custom-content">
+  <div class="login-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ isRegistering ? 'Crea tu cuenta' : 'Bienvenido' }}
+        </ion-card-title>
+      </ion-card-header>
 
-  <!-- Formulario de login -->
-  <div *ngIf="!isRegistering">
-    <ion-item>
-      <ion-label position="stacked">Email: </ion-label>
-      <ion-input type="email" [(ngModel)]="txtEmail"></ion-input>
-    </ion-item>
+      <ion-card-content>
+        <!-- Formulario de inicio de sesión -->
+        <div *ngIf="!isRegistering">
+          <ion-item>
+            <ion-label position="stacked">Correo electrónico</ion-label>
+            <ion-input type="email" [(ngModel)]="txtEmail" placeholder="ejemplo@correo.com"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="txtPassword" placeholder="••••••••"></ion-input>
+          </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Contraseña: </ion-label>
-      <ion-input type="password" [(ngModel)]="txtPassword"></ion-input>
-    </ion-item>
+          <ion-item lines="none">
+            <ion-label>Recordar Contraseña</ion-label>
+            <ion-checkbox slot="start" [(ngModel)]="rememberMe"></ion-checkbox>
+          </ion-item>
 
-    <ion-item lines="none">
-      <ion-label>Recordar Contraseña</ion-label>
-      <ion-checkbox slot="start" [(ngModel)]="rememberMe"></ion-checkbox>
-    </ion-item>
+          <ion-button expand="block" (click)="login()">Iniciar Sesión</ion-button>
+          <p class="switch-text">
+            ¿No tienes cuenta? <a (click)="toggleView()">Regístrate</a>
+          </p>
+        </div>
 
-    <ion-button expand="full" (click)="login()">Iniciar Sesión</ion-button>
-    <ion-button expand="full" fill="outline" (click)="toggleView()">Registrar Usuario</ion-button>
-  </div>
+        <!-- Formulario de registro -->
+        <div *ngIf="isRegistering">
+          <ion-item>
+            <ion-label position="stacked">Nombre completo</ion-label>
+            <ion-input type="text" [(ngModel)]="txtNombre" placeholder="Nombre y Apellidos"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo electrónico</ion-label>
+            <ion-input type="email" [(ngModel)]="txtEmail" placeholder="ejemplo@correo.com"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="txtPassword" placeholder="••••••••"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Rol</ion-label>
+            <ion-select [(ngModel)]="txtRol" placeholder="Seleccionar rol">
+              <ion-select-option value="Administrador">Administrador</ion-select-option>
+              <ion-select-option value="Estilista">Estilista</ion-select-option>
+              <ion-select-option value="Recepcionista">Recepcionista</ion-select-option>
+            </ion-select>
+          </ion-item>
 
-  <!-- Formulario de registro -->
-  <div *ngIf="isRegistering">
-    <ion-item>
-      <ion-label position="stacked">Nombre: </ion-label>
-      <ion-input type="text" [(ngModel)]="txtNombre"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Email: </ion-label>
-      <ion-input type="email" [(ngModel)]="txtEmail"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Contraseña: </ion-label>
-      <ion-input type="password" [(ngModel)]="txtPassword"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Rol: </ion-label>
-      <ion-select [(ngModel)]="txtRol">
-        <ion-select-option value="Administrador">Administrador</ion-select-option>
-        <ion-select-option value="Estilista">Estilista</ion-select-option>
-        <ion-select-option value="Recepcionista">Recepcionista</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-button expand="full" (click)="guardarUsuario()">Registrar</ion-button>
-    <ion-button expand="full" fill="outline" color="danger" (click)="toggleView()">Cancelar</ion-button>
+          <ion-button expand="block" (click)="guardarUsuario()">Registrar</ion-button>
+          <p class="switch-text">
+            ¿Ya tienes cuenta? <a (click)="toggleView()">Inicia sesión</a>
+          </p>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

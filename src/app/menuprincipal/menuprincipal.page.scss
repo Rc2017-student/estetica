@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #121212; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+  }
+  
+  .navigation {
+    flex: 0 0 20%; /* La lista ocupa el 20% del ancho */
+    margin: 10px;
+  }
+  
+  .navigation ion-item {
+    margin-bottom: 10px; /* Espaciado entre los elementos */
+  }
+  
+  .content {
+    flex: 1; /* El contenido central ocupa el resto del espacio */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .content img {
+    max-width: 80%; /* Ancho máximo del 80% para un mejor balance */
+    max-height: 400px; /* Aumentamos la altura máxima */
+    height: auto; /* Mantiene la proporción */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 30px; /* Espacio adecuado entre la imagen y el texto */
+  }
+  
+  
+  
+  .content p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+  }
+  

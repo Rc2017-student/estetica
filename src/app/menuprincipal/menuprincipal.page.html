@@ -9,22 +9,32 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item button [routerLink]="['/citas']">
-      <ion-icon slot="start" name="calendar-outline"></ion-icon>
-      <ion-label>Citas</ion-label>
-    </ion-item>
-    <ion-item button [routerLink]="['/servicios']">
-      <ion-icon slot="start" name="briefcase-outline"></ion-icon>
-      <ion-label>Servicios</ion-label>
-    </ion-item>
-    <ion-item button [routerLink]="['/clientes']">
-      <ion-icon slot="start" name="people-outline"></ion-icon>
-      <ion-label>Clientes</ion-label>
-    </ion-item>
-    <ion-item button [routerLink]="['/notificaciones']">
-      <ion-icon slot="start" name="notifications-outline"></ion-icon>
-      <ion-label>Notificaciones</ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="container">
+    <!-- Lista de navegación -->
+    <ion-list class="navigation">
+      <ion-item button [routerLink]="['/citas']">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-label>Citas</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/servicios']">
+        <ion-icon slot="start" name="briefcase-outline"></ion-icon>
+        <ion-label>Servicios</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/clientes']">
+        <ion-icon slot="start" name="people-outline"></ion-icon>
+        <ion-label>Clientes</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/notificaciones']">
+        <ion-icon slot="start" name="notifications-outline"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Contenido central -->
+    <div class="content">
+      <h1>Bienvenidx a Happy Endings</h1>
+      <img src="assets/estetica.jpg" alt="Estética" />
+      <p>Donde siempre tendrás un final feliz</p>
+    </div>
+  </div>
 </ion-content>

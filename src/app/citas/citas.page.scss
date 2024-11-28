@@ -1,0 +1,57 @@
+/* Contenedor principal para dividir en dos columnas */
+#citas-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  /* Contenedor de agendar citas */
+  #agendar-cita {
+    flex: 1;
+    background-color: #2b2b2b;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  #agendar-cita h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor de lista de citas */
+  #lista-citas {
+    flex: 2;
+    background-color: #2b2b2b;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  #lista-citas h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajuste para los botones de los contenedores */
+  ion-button {
+    margin-top: 10px;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    #citas-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #agendar-cita,
+    #lista-citas {
+      width: 100%;
+    }
+  }
+  
